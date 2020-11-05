@@ -1,13 +1,15 @@
 import api from "../services/apiService";
+import { formatDate } from "../helpers/date";
 
 class Locations {
-  constructor(api) {
+  constructor(api, helpers) {
     this.api = api;
     this.countries = null;
     this.cities = null;
     this.shortCitiesList = {};
     this.lastSearch = {};
     this.airlines = {};
+    this.formatDate = helpers.formatDate;
   }
   async init() {
     //Метод делает запрос на получение городов и стран у нашего api
@@ -99,11 +101,25 @@ class Locations {
 
   async fetchTickets(params) {
     const response = await this.api.prices(params);
-    this.lastSearch = response.data;
+    this.lastSearch = this.serializeTickets(response.data);
+  }
+
+  serializeTickets(tickets) {
+    return Object.values(tickets).map((ticket) => {
+      return {
+        ...ticket,
+        origin_name: this.getCityNameByCode(ticket.origin),
+        destination_name: this.getCityNameByCode(ticket.destination),
+        airline_logo: this.getAirLineLogoByCode(ticket.airline),
+        airline_name: this.getAirLineNameByCode(ticket.airline),
+        departure_at: this.formatDate(ticket.departure_at, "dd MMM yyyy hh:mm"),
+        return_at: this.formatDate(ticket.return_at, "dd MMM yyyy hh:mm"),
+      };
+    });
   }
 }
 
-const locations = new Locations(api);
+const locations = new Locations(api, { formatDate });
 export default locations;
 
 // { 'City', 'Country', null }
