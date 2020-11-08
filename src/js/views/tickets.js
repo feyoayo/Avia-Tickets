@@ -10,7 +10,7 @@ class TicketsUI {
     //Метод который отвечает за отрисовку рейсов на странице
     this.clearContaier();
 
-    if (!tickets.length) {
+    if (!tickets) {
       this.showEmptyMsg();
       return;
     }
@@ -18,9 +18,14 @@ class TicketsUI {
     let fragment = "";
     const currency = this.getCurrencySymbol();
 
-    tickets.forEach((ticket) => {
+    Object.values(tickets).forEach((ticket) => {
       const template = TicketsUI.ticketTemplate(ticket, currency);
       fragment += template;
+      // ticket.addEventLister("click", ({ target }) => {
+      //   if (target && target.classList.contains("btn-small")) {
+      //     console.log("hi");
+      //   }
+      // });
     });
 
     this.container.insertAdjacentHTML("afterbegin", fragment);
@@ -49,7 +54,7 @@ class TicketsUI {
   static ticketTemplate(ticket, currency) {
     // Генерирует шаблон одного билета
     return `
-    <div class="col s12 m6">
+    <div data-ticket-id="${ticket.id}" class="col s12 m6 card-contaier">
         <div class="card ticket-card">
             <div class="ticket-airline d-flex align-items-center">
                 <img
@@ -78,6 +83,10 @@ class TicketsUI {
                 <span class="ticket-transfers">Пересадок: ${ticket.transfers}</span>
                 <span class="ticket-flight-number">Номер рейса: ${ticket.flight_number}</span>
               </div>
+                <a
+                class="waves-effect waves-light btn-small green darken-1 add-favorite ml-auto"
+                >Add to favorites</a
+              >
             </div>
     </div>
     `;

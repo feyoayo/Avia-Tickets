@@ -114,6 +114,7 @@ class Locations {
         airline_name: this.getAirLineNameByCode(ticket.airline),
         departure_at: this.formatDate(ticket.departure_at, "dd MMM yyyy hh:mm"),
         return_at: this.formatDate(ticket.return_at, "dd MMM yyyy hh:mm"),
+        id: `ticket-${Math.random()}`,
       };
     });
   }
