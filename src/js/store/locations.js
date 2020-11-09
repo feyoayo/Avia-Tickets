@@ -1,5 +1,7 @@
 import api from "../services/apiService";
 import { formatDate } from "../helpers/date";
+// import favoritesUI from "../views/favorites";
+// import favorites from "../store/favorites";
 
 class Locations {
   constructor(api, helpers) {
@@ -114,7 +116,10 @@ class Locations {
         airline_name: this.getAirLineNameByCode(ticket.airline),
         departure_at: this.formatDate(ticket.departure_at, "dd MMM yyyy hh:mm"),
         return_at: this.formatDate(ticket.return_at, "dd MMM yyyy hh:mm"),
-        id: `ticket-${Math.random()}`,
+        id: `ticket-/${this.formatDate(
+          ticket.departure_at,
+          "dd MMM yyyy hh:mm"
+        )}`,
       };
     });
   }

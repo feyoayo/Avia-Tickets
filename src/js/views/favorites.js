@@ -1,10 +1,12 @@
 import favorites from "../store/favorites";
-
+import currencyUI from "./currency";
 class FavoritesUI {
-  constructor() {
+  constructor(currency) {
     this.favBtn = document.querySelector(".favorites");
     this.favContaier = document.getElementById("dropdown1");
     this._listTickets = document.querySelectorAll(".tickets-sections");
+    this.favItems = document.querySelectorAll(".favorite-item");
+    this.getCurrencySymbol = currency.getCurrencySymbol.bind(currency);
   }
 
   //Методы
@@ -12,24 +14,39 @@ class FavoritesUI {
     return this._listTickets;
   }
 
+  get ddBtn() {
+    return this.favBtn;
+  }
+
   get favoritesList() {
-    return {};
+    return this.favContaier.children;
   }
 
   favTicketRender(favoritesObj) {
+    if (!FavoritesUI.favoritesList.length) {
+      console.log("Empty");
+      this.favEmptyMsg();
+      return;
+    }
     //Очищаем чтобы не стакалось
     this.favContaier.innerHTML = "";
+    const currency = this.getCurrencySymbol();
 
     let fragment = "";
 
     Object.values(favoritesObj).forEach((item) => {
-      const template = FavoritesUI.favTicketTemplate(item);
+      const template = FavoritesUI.favTicketTemplate(item, currency);
       fragment += template;
     });
     this.favContaier.insertAdjacentHTML("afterbegin", fragment);
   }
 
-  static favTicketTemplate(item) {
+  favEmptyMsg() {
+    const template = FavoritesUI.favEmptyTemplate();
+    this.favContaier.insertAdjacentHTML("afterbegin", template);
+  }
+
+  static favTicketTemplate(item, currency) {
     return `
     <div data-ticket-id="${item.id}" class="favorite-item d-flex align-items-start">
         <img
@@ -51,7 +68,7 @@ class FavoritesUI {
                   </div>
                   <div class="ticket-time-price d-flex align-items-center">
                     <span class="ticket-time-departure">${item.departure_at}</span>
-                    <span class="ticket-price ml-auto">$315</span>
+                    <span class="ticket-price ml-auto">${currency} ${item.price}</span>
                   </div>
                   <div class="ticket-additional-info">
                     <span class="ticket-transfers">Пересадок: ${item.transfers}</span>
@@ -65,7 +82,17 @@ class FavoritesUI {
               </div>
     `;
   }
+  static favEmptyTemplate() {
+    return `  
+    <div class="tickets-empty-res-msg favorite-item">
+      Favorites storage is empty
+    </div>`;
+  }
+
+  favDeleteFromHtml(el) {
+    el.remove();
+  }
 }
 
-const favoritesUI = new FavoritesUI();
+const favoritesUI = new FavoritesUI(currencyUI);
 export default favoritesUI;

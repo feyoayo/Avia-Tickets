@@ -11,12 +11,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const form = formUI.form;
   const listTickets = favoritesUI.listTickets;
+  const ddBtn = favoritesUI.ddBtn;
 
   //Events
   form.addEventListener("submit", (e) => {
     e.preventDefault();
     onFormSubmit();
   });
+
+  ddBtn.addEventListener("click", ddHandler);
 
   //Handlers
 
@@ -47,23 +50,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
     //Отрисовываем на странице полученные данные
     ticketsUI.renderTickets(favorites.data);
+    console.log(favorites.data);
     //Добавляем обработчики на кнопку
     listTickets.forEach((card) => {
       card.addEventListener("click", ({ target }) => {
         if (target && target.classList.contains("btn-small")) {
-          console.dir(target);
           favorites.onClick(target);
-          if (
-            target.classList.contains("green") &&
-            target.innerText == "ADD TO FAVORITES"
-          ) {
-            target.classList.remove("green");
-            target.classList.add("red");
-            target.innerText = "Remove From Favorites";
-          } else {
-            target.classList.add("green");
-            target.innerText = "ADD TO FAVORITES";
-          }
+        }
+      });
+    });
+  }
+
+  async function ddHandler() {
+    ticketsUI.renderTickets(favorites.data);
+    if (!favoritesUI.favoritesList.length) {
+      favoritesUI.favEmptyMsg();
+    }
+    const childs = favoritesUI.favContaier.children;
+    [...childs].forEach((item) => {
+      item.addEventListener("click", ({ target }) => {
+        if (target && target.classList.contains("delete-favorite")) {
+          favorites.onDelete(target);
         }
       });
     });

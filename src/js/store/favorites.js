@@ -22,6 +22,14 @@ class Favorites {
     this.listOfFavorite[id] = favorites.data[id];
     localStorage.setItem("favorites", JSON.stringify(this.listOfFavorite));
     favoritesUI.favTicketRender(this.listOfFavorite);
+    this.listOfFavorite;
+    console.log(this.listOfFavorite);
+  }
+  onDelete(target) {
+    const parent = target.closest("[data-ticket-id]");
+    const id = parent.dataset.ticketId;
+    delete this.listOfFavorite[id];
+    favoritesUI.favDeleteFromHtml(parent);
   }
 }
 
