@@ -145,10 +145,11 @@
 }
 
 .ticket-price {
-  font-size: 25px;
+  font-size: 20px;
   padding: 5px;
-  background: #6a1b9a;
+  background: #1e3541;
   color: #fff;
+  border-radius: 3px;
 }
 
 .ticket-additional-info {

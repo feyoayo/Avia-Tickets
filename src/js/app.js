@@ -9,6 +9,11 @@ import favoritesUI from "./views/favorites";
 document.addEventListener("DOMContentLoaded", () => {
   initApp();
 
+  //Пробуем поработать с локал сторейджем
+  let favStorageString = localStorage.getItem("favorites");
+  let favStorage = JSON.parse(favStorageString);
+  favoritesUI.favTicketRender(favStorage);
+
   const form = formUI.form;
   const listTickets = favoritesUI.listTickets;
   const ddBtn = favoritesUI.ddBtn;
@@ -50,7 +55,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     //Отрисовываем на странице полученные данные
     ticketsUI.renderTickets(favorites.data);
-    console.log(favorites.data);
     //Добавляем обработчики на кнопку
     listTickets.forEach((card) => {
       card.addEventListener("click", ({ target }) => {
@@ -62,7 +66,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   async function ddHandler() {
-    ticketsUI.renderTickets(favorites.data);
     if (!favoritesUI.favoritesList.length) {
       favoritesUI.favEmptyMsg();
     }
@@ -76,3 +79,5 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
+//TODO Подумать как сделать так, чтобы плашка "добавлено в избранные сохранялась и далее, даже после перезагрузке она сообщает что данный билет в избранных"

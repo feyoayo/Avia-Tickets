@@ -23,9 +23,8 @@ class FavoritesUI {
   }
 
   favTicketRender(favoritesObj) {
-    if (!FavoritesUI.favoritesList.length) {
-      console.log("Empty");
-      this.favEmptyMsg();
+    if (!favoritesObj) {
+      console.log("Give me your favorites");
       return;
     }
     //Очищаем чтобы не стакалось
@@ -40,6 +39,9 @@ class FavoritesUI {
     });
     this.favContaier.insertAdjacentHTML("afterbegin", fragment);
   }
+  // favDeleteFromHtml(el) {
+  //   el.remove();
+  // }
 
   favEmptyMsg() {
     const template = FavoritesUI.favEmptyTemplate();
@@ -87,10 +89,6 @@ class FavoritesUI {
     <div class="tickets-empty-res-msg favorite-item">
       Favorites storage is empty
     </div>`;
-  }
-
-  favDeleteFromHtml(el) {
-    el.remove();
   }
 }
 
