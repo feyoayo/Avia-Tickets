@@ -3,24 +3,105 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
     />
+
     <title>Document</title>
   <link href="./style.css" rel="stylesheet"></head>
   <body>
-    <nav class="header purple darken-1">
+    <nav class="header blue-grey">
       <div class="nav-wrapper">
         <div class="container d-flex align-items-center">
           <div class="logo d-flex align-items-center">
             <i class="large material-icons">flight_takeoff</i>
             <a href="#" class="brand-logo">Avia Tickets</a>
           </div>
+          <div class="favorites">
+            <!-- Dropdown Trigger -->
+            <a
+              class="dropdown-trigger btn blue-grey white-text"
+              href="#"
+              data-target="dropdown1"
+              >Favorites</a
+            >
+
+            <!-- Dropdown Structure -->
+            <div id="dropdown1" class="dropdown-content">
+              <!-- <div class="favorite-item d-flex align-items-start">
+                <img
+                  src="http://pics.avs.io/200/200/PS.png"
+                  class="favorite-item-airline-img"
+                />
+                <div class="favorite-item-info d-flex flex-column">
+                  <div
+                    class="favorite-item-destination d-flex align-items-center"
+                  >
+                    <div class="d-flex align-items-center mr-auto">
+                      <span class="favorite-item-city">Харьков </span>
+                      <i class="medium material-icons">flight_takeoff</i>
+                    </div>
+                    <div class="d-flex align-items-center">
+                      <i class="medium material-icons">flight_land</i>
+                      <span class="favorite-item-city">Львов</span>
+                    </div>
+                  </div>
+                  <div class="ticket-time-price d-flex align-items-center">
+                    <span class="ticket-time-departure">14 Sep 2019 02:30</span>
+                    <span class="ticket-price ml-auto">$315</span>
+                  </div>
+                  <div class="ticket-additional-info">
+                    <span class="ticket-transfers">Пересадок: 1</span>
+                    <span class="ticket-flight-number">Номер рейса: 26</span>
+                  </div>
+                  <a
+                    class="waves-effect waves-light btn-small pink darken-3 delete-favorite ml-auto"
+                    >Delete</a
+                  >
+                </div>
+              </div> -->
+              <!-- /favorite item -->
+              <!-- <div class="favorite-item d-flex align-items-start">
+                <img
+                  src="http://pics.avs.io/200/200/PS.png"
+                  class="favorite-item-airline-img"
+                />
+                <div class="favorite-item-info d-flex flex-column">
+                  <div
+                    class="favorite-item-destination d-flex align-items-center"
+                  >
+                    <div class="d-flex align-items-center mr-auto">
+                      <span class="favorite-item-city">Харьков </span>
+                      <i class="medium material-icons">flight_takeoff</i>
+                    </div>
+                    <div class="d-flex align-items-center">
+                      <i class="medium material-icons">flight_land</i>
+                      <span class="favorite-item-city">Львов</span>
+                    </div>
+                  </div>
+                  <div class="ticket-time-price d-flex align-items-center">
+                    <span class="ticket-time-departure">14 Sep 2019 02:30</span>
+                    <span class="ticket-price ml-auto">$315</span>
+                  </div>
+                  <div class="ticket-additional-info">
+                    <span class="ticket-transfers">Пересадок: 1</span>
+                    <span class="ticket-flight-number">Номер рейса: 26</span>
+                  </div>
+                  <a
+                    class="waves-effect waves-light btn-small pink darken-3 delete-favorite ml-auto"
+                    >Delete</a
+                  >
+                </div>
+              </div> -->
+              <!-- /favorite item -->
+            </div>
+          </div>
           <ul id="nav-mobile" class="right hide-on-med-and-down ml-auto">
             <li>
               <div class="input-field currency-select">
-                <select>
+                <select id="currency">
                   <option value="USD">$ US Dollar</option>
                   <option value="EUR">€ Euro</option>
                 </select>
@@ -60,7 +141,7 @@
                       class="datepicker"
                       id="datepicker-depart"
                     />
-                    <label for="datepicker-depart">Depart Date</label>
+                    <label for="datepicker-depart">Depart date</label>
                   </div>
                   <div class="input-field">
                     <input
@@ -68,12 +149,12 @@
                       class="datepicker"
                       id="datepicker-return"
                     />
-                    <label for="datepicker-return">Return Date</label>
+                    <label for="datepicker-return">Return date</label>
                   </div>
                 </div>
                 <div class="card-action d-flex">
                   <button
-                    class="btn waves-effect waves-light purple darken-3"
+                    class="btn waves-effect waves-light blue-grey"
                     type="submit"
                     name="action"
                   >
@@ -81,7 +162,7 @@
                     <i class="material-icons right">send</i>
                   </button>
                   <button
-                    class="btn waves-effect waves-light pink darken-3 ml-auto"
+                    class="btn waves-effect waves-light green ml-auto"
                     type="reset"
                     name="action"
                   >
@@ -95,5 +176,10 @@
         </div>
       </div>
     </div>
-  <script type="text/javascript" src="polyfill.bce1996b29113a1a7b0c.js"></script><script type="text/javascript" src="app.bce1996b29113a1a7b0c.js"></script></body>
+    <div class="tickets-sections">
+      <div class="container">
+        <div class="row"></div>
+      </div>
+    </div>
+  <script type="text/javascript" src="polyfill.e671310c104a46cc41ed.js"></script><script type="text/javascript" src="app.e671310c104a46cc41ed.js"></script></body>
 </html>
